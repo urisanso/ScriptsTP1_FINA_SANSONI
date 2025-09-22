@@ -6,10 +6,10 @@ import pandas as pd
 import yaml
 
 # leemos el dataset de la IMU
-trayectoria_csv = pd.read_csv("data.csv")
+trayectoria_csv = pd.read_csv("ScriptsTP1_FINA_SANSONI/mav0/state_groundtruth_estimate0/data.csv")
 
 # leemos matriz de transformación de la cam0 con repecto a la IMU
-with open("sensor.yaml", "r") as f:
+with open("ScriptsTP1_FINA_SANSONI/mav0/cam0/sensor.yaml", "r") as f:
     sensor_data = yaml.safe_load(f)
 
 T_data = sensor_data["T_BS"]["data"]   
