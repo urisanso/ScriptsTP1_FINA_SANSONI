@@ -5,8 +5,8 @@ Este repositorio contiene scripts en Python y datasets asociados para analizar y
 ## Estructura del repositorio
 
 .
-├── mav0/                               # Carpeta con los archivos CSV (datos de la IMU, groundtruth, etc.)
-│   ├── state_groundtruth_estimate0/data.csv
+├── mav0/                               # Carpeta con los archivos CSV (datos de la IMU, groundtruth, etc.) \\
+│   ├── state_groundtruth_estimate0/data.csv \\
 │   ├── cam0/data/sensor.yaml
 │   └── ...
 ├── ejercicio1-2.py                     # Transformaciones con matrices de rotación en 3D
