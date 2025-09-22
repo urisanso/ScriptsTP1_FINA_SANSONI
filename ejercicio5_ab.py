@@ -2,8 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from transforms3d.quaternions import quat2mat
+from transforms3d.quaternions import mat2quat
 import pandas as pd
 import yaml
+
 
 # leemos el dataset de la IMU
 trayectoria_csv = pd.read_csv("ScriptsTP1_FINA_SANSONI/mav0/state_groundtruth_estimate0/data.csv")
@@ -27,7 +29,7 @@ scale = 0.25
 
 xs, ys, zs = [], [], []
 
-for i in range(5):   #len(trayectoria_csv["#timestamp"])
+for i in range(1500):   #len(trayectoria_csv["#timestamp"])
 
     t_ns = trayectoria_csv["#timestamp"].iloc[i]
     t_s = t_ns*1e-9
@@ -72,7 +74,6 @@ for i in range(5):   #len(trayectoria_csv["#timestamp"])
     # trayectoria acumulada
     ax.plot(xs, ys, zs, color='gray', linewidth=1, label='cam0')
 
-
     # dibujamos las flechas
     ax.quiver(X, Y, Z, T_WC[0,0], T_WC[1,0], T_WC[2,0], color='r', length=scale, label='x')
     ax.quiver(X, Y, Z, T_WC[0,1], T_WC[1,1], T_WC[2,1], color='g', length=scale, label='y')
@@ -93,10 +94,15 @@ for i in range(5):   #len(trayectoria_csv["#timestamp"])
     plt.draw()
     plt.pause(0.00000000001)  # Pausa breve para ver la animación
 
-    
+    # Convertimos La matriz de rotación 3x3 a cuaternion
+    # Extraemos R (rotación 3x3)
+    R_WC = T_WC[0:3, 0:3]
+    Q = mat2quat(R_WC)
+    QW, QX, QY, QZ= Q
+
     # Imprimimos nuevos datos
     print(f"#timestamp: {t_s} x: {x} y: {y} z: {z} qw: {qw} qx: {qx} qy: {qy} qz: {qz}")
-    print(f"#timestamp: {t_s} x: {X} y: {Y} z: {Z} qw: {qw} qx: {qx} qy: {qy} qz: {qz}")
+    print(f"#timestamp: {t_s} x: {X} y: {Y} z: {Z} qw: {QW} qx: {QX} qy: {QY} qz: {QZ}")
 
 plt.ioff()
 plt.show()
