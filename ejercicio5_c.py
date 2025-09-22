@@ -28,7 +28,7 @@ scale = 0.25
 XS, YS, ZS = [], [], []
 xs, ys, zs = [], [], []
 
-for i in range(500):   #len(trayectoria_csv["#timestamp"])
+for i in range(1500):   #len(trayectoria_csv["#timestamp"])
 
     t_ns = trayectoria_csv["#timestamp"].iloc[i]
     t_s = t_ns*1e-9
@@ -74,7 +74,7 @@ for i in range(500):   #len(trayectoria_csv["#timestamp"])
     # limpiamos vectores de frames anteriores
     ax.cla()
 
-    # trayectoria acumulada
+    # trayectorias acumuladas
     ax.plot(XS, YS, ZS, color='gray', linewidth=1, label='cam0')
 
     ax.plot(xs, ys, zs, color='orange', linewidth=1, label='IMU')
@@ -106,9 +106,6 @@ for i in range(500):   #len(trayectoria_csv["#timestamp"])
 
 plt.ioff()
 plt.show()
-
-
-
 
 
 
